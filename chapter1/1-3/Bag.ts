@@ -20,6 +20,16 @@ export class Bag {
     this.ticket = ticket;
   }
 
+  hold = (ticket: Ticket) => {
+    this.setTicket(ticket);
+
+    if (this.hasInvitation()) {
+      return 0;
+    }
+    this.minusAmount(ticket.getFee());
+    return ticket.getFee();
+  };
+
   hasInvitation = () => this.invitation !== null;
 
   hasTicket = () => this.ticket !== null;

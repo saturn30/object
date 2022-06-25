@@ -1,3 +1,4 @@
+import { Audience } from "./Audience";
 import { Ticket } from "./Ticket";
 
 export class TicketOffice {
@@ -8,6 +9,16 @@ export class TicketOffice {
     this.amount = amount;
     this.tickets = tickets;
   }
+
+  sellTicketTo = (audience: Audience) => {
+    const ticket = this.getTicket();
+
+    if (ticket) {
+      this.plusAmount(audience.buy(ticket));
+    } else {
+      throw new Error("티켓이 존재하지 않습니다.");
+    }
+  };
 
   getTicket = () => this.tickets.shift();
 
